@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Winkopi Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <div class="relative overflow-hidden">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-[#341D15] to-[#AE6B36] text-gray-400 text-center w-full">
+            <nav class="w-full flex justify-between items-center px-6 py-4">
+                <div class="text-white text-2xl font-bold">Winkopi</div>
+                <div class="flex space-x-4 text-white">
+                    <a href="#kopi" class="hover:text-gray-300">Kopi</a>
+                    <a href="#non-kopi" class="hover:text-gray-300">Non Kopi</a>
+                    <a href="#minuman-dingin" class="hover:text-gray-300">Minuman Dingin</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="w-11/12 h-14 bg-white rounded-lg border border-gray-300 mx-auto mt-5 flex items-center px-4">
+            <input type="text" placeholder="Search..." class="flex-1 border-none outline-none text-gray-500 text-sm" />
+            <button class="w-11 h-11 bg-[#C67C4E] rounded-lg flex items-center justify-center ml-2">
+                <i class="fas fa-search text-white"></i>
+            </button>
+        </div>
+
+        <!-- Kopi Section -->
+        <section id="kopi" class="p-4">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Kopi</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Item -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden relative">
+                    <img src="https://storage.googleapis.com/a1aa/image/BjBbUgod7fWiSCZ9KUcHV87JSPCWpsRVsX7MII7zc25xZezTA.jpg" alt="Image of a coffee cup with a latte art" class="w-full h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Kopi Susu</h3>
+                        <p class="text-xl font-bold text-gray-700">15k</p>
+                    </div>
+                    <button class="absolute bottom-4 right-4 w-24 h-10 bg-[#C67C4E] rounded-full text-white flex items-center justify-center">Pesan</button>
+                </div>
+                <!-- Item -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden relative">
+                    <img src="https://storage.googleapis.com/a1aa/image/6ki9ccBWCeT1cCFFPa4y0yZMSHt9x54AAmg9OeIFGhrXz8zTA.jpg" alt="Image of a cappuccino with a heart-shaped latte art" class="w-full h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Kopi Susu Caramel</h3>
+                        <p class="text-xl font-bold text-gray-700">15k</p>
+                    </div>
+                    <button class="absolute bottom-4 right-4 w-24 h-10 bg-[#C67C4E] rounded-full text-white flex items-center justify-center">Pesan</button>
+                </div>
+                <!-- Add more items here -->
+            </div>
+        </section>
+
+        <!-- Non Kopi Section -->
+        <section id="non-kopi" class="p-4">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Non Kopi</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Item -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden relative">
+                    <img src="https://storage.googleapis.com/a1aa/image/OeEqS2EIqfuiW0Rgdc7IBIwdF5xI4leyeFkZreA537arbmf8E.jpg" alt="Image of a red velvet drink" class="w-full h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Redvelvet</h3>
+                        <p class="text-xl font-bold text-gray-700">15k</p>
+                    </div>
+                    <button class="absolute bottom-4 right-4 w-24 h-10 bg-[#C67C4E] rounded-full text-white flex items-center justify-center">Pesan</button>
+                </div>
+                <!-- Add more items here -->
+            </div>
+        </section>
+
+        <!-- Minuman Dingin Section -->
+        <section id="minuman-dingin" class="p-4">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Minuman Dingin</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Item -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden relative">
+                    <img src="https://storage.googleapis.com/a1aa/image/acoDgr2TCu5OAFdU0JvBNNFgtCZFqCZkLOakZWnhZlI1Mf5JA.jpg" alt="Image of iced tea" class="w-full h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Es Teh</h3>
+                        <p class="text-xl font-bold text-gray-700">5k</p>
+                    </div>
+                    <button class="absolute bottom-4 right-4 w-24 h-10 bg-[#C67C4E] rounded-full text-white flex items-center justify-center">Pesan</button>
+                </div>
+                <!-- Add more items here -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-orange-800 text-white text-center py-4">
+            <p>Website Winkopi created by PT ANDROMEDA</p>
+        </footer>
+    </div>
+</body>
+
+</html>
