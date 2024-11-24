@@ -36,12 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 // Jika username adalah 'admin' dan role admin, redirect ke admin.php
                 $message = "Login Admin Berhasil";
                 header("Location: admin.php");
-                exit(); // Hentikan eksekusi script setelah mengarahkan pengguna
+                exit();
             } else {
                 // Jika username bukan admin, redirect ke index.php
                 $message = "Login Berhasil";
                 header("Location: login_admin.php");
-                exit(); // Hentikan eksekusi script setelah mengarahkan pengguna
+                exit();
             }
         } else {
             // Login gagal
