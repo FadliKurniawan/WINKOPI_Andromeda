@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waktunya Coffee Break</title>
+    <title>Waktunya Coffee Break - Winkopi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -29,7 +29,7 @@
         </p>
         <button
             class="bg-[#F28C28] text-white py-3 px-6 rounded-full mb-4 w-full text-lg font-semibold shadow-lg hover:bg-[#d37722] transition-all duration-300 transform hover:scale-105"
-            onclick="window.location.href='basic.html'">
+            onclick="window.location.href='menu.php'">
             Masuk
         </button>
         <a class="text-[#F28C28] text-base font-semibold hover:text-[#d37722] transition duration-200"

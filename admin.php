@@ -6,9 +6,13 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Query untuk menampilkan 5 menu terbaru
-$sql = "SELECT nama_menu, kategori FROM menu ORDER BY created_at DESC LIMIT 5";
+// Query untuk menampilkan 5 menu terbaru dengan gambar
+$sql = "SELECT nama_menu, kategori, gambar FROM menu ORDER BY created_at DESC LIMIT 5";
 $result = $conn->query($sql);
+
+// Query untuk menampilkan semua menu yang tersedia dengan gambar
+$sql_all = "SELECT nama_menu, gambar FROM menu";
+$result_all = $conn->query($sql_all);
 ?>
 
 <!DOCTYPE html>
@@ -98,6 +102,7 @@ $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<div class='bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105 hover:shadow-xl'>";
+                            echo "<img src='menu/" . $row['gambar'] . "' alt='" . $row['nama_menu'] . "' class='w-full h-40 object-cover rounded-lg mb-4'>";
                             echo "<h3 class='text-lg font-semibold text-gray-800 mb-2'>" . $row['nama_menu'] . "</h3>";
                             echo "<p class='text-gray-600'>" . $row['kategori'] . "</p>";
                             echo "</div>";
@@ -114,13 +119,10 @@ $result = $conn->query($sql);
                 <h2 class="text-3xl font-bold text-center text-[#341D15] mb-6">Daftar Menu Tersedia</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <?php
-                    // Query untuk menampilkan semua menu yang tersedia
-                    $sql = "SELECT nama_menu FROM menu";
-                    $result = $conn->query($sql);
-
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
+                    if ($result_all->num_rows > 0) {
+                        while ($row = $result_all->fetch_assoc()) {
                             echo "<div class='bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105 hover:shadow-xl'>";
+                            echo "<img src='menu/" . $row['gambar'] . "' alt='" . $row['nama_menu'] . "' class='w-full h-40 object-cover rounded-lg mb-4'>";
                             echo "<h3 class='text-lg font-semibold text-gray-800 mb-2'>" . $row['nama_menu'] . "</h3>";
                             echo "</div>";
                         }

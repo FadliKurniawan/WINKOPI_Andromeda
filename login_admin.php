@@ -6,11 +6,11 @@ include_once("./assets/inc/conn.php");
 // Periksa apakah pengguna sudah login sebelumnya
 if (isset($_SESSION['username'])) {
     // Redirect pengguna ke halaman yang sesuai
-    header("Location: index.php");
+    header("Location: login_admin.php");
     exit();
 }
 
-$message = ""; // Variabel untuk menyimpan pesan notifikasi
+$message = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Mengambil data dari form
@@ -19,28 +19,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
+        // Mengamankan input untuk mencegah SQL Injection
+        $username = $conn->real_escape_string($username);
+        $password = $conn->real_escape_string($password);
+
         // Mengecek informasi login di database
         $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             // Login berhasil
+            $row = $result->fetch_assoc();
             $_SESSION['username'] = $username; // Set session username
 
-            if ($username === 'admin') {
-                // Jika username adalah 'admin', redirect ke admin.html
+            if ($username === 'admin' && $row['role'] == 'admin') {
+                // Jika username adalah 'admin' dan role admin, redirect ke admin.php
                 $message = "Login Admin Berhasil";
                 header("Location: admin.php");
                 exit(); // Hentikan eksekusi script setelah mengarahkan pengguna
             } else {
-                // Jika bukan admin, redirect ke index.php
+                // Jika username bukan admin, redirect ke index.php
                 $message = "Login Berhasil";
-                header("Location: index.php");
+                header("Location: login_admin.php");
                 exit(); // Hentikan eksekusi script setelah mengarahkan pengguna
             }
         } else {
             // Login gagal
-            $message = "Invalid username or password";
+            $message = "Username atau Password Salah!";
         }
     }
 }
@@ -52,11 +57,10 @@ $conn->close();
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>
-        Admin Login - Waktunya Coffee Break
-    </title>
+    <title>Admin Login - Waktunya Coffee Break</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -76,7 +80,7 @@ $conn->close();
             Please enter your credentials to access the admin panel.
         </p>
         <!-- Form Login -->
-        <form action="admin_dashboard.php" class="space-y-4" method="POST">
+        <form action="login_admin.php" class="space-y-4" method="POST">
             <div>
                 <label class="block text-left text-gray-200 font-semibold" for="username">
                     Username
@@ -109,23 +113,7 @@ $conn->close();
             });
         </script>
     <?php endif; ?>
-    <script>
-        (function() {
-            'use strict'
-            const forms = document.querySelectorAll('.requires-validation')
-            Array.from(forms)
-                .forEach(function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
 
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
-    </script>
 </body>
 
 </html>
