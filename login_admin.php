@@ -5,8 +5,8 @@ include_once("./assets/inc/conn.php");
 
 // Periksa apakah pengguna sudah login sebelumnya
 if (isset($_SESSION['username'])) {
-    // Redirect pengguna ke halaman yang sesuai
-    header("Location: login_admin.php");
+    // Redirect pengguna ke halaman dashboard jika sudah login
+    header("Location: admin.php");
     exit();
 }
 
@@ -31,16 +31,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Login berhasil
             $row = $result->fetch_assoc();
             $_SESSION['username'] = $username; // Set session username
+            $_SESSION['role'] = $row['role']; // Set session role
 
-            if ($username === 'admin' && $row['role'] == 'admin') {
-                // Jika username adalah 'admin' dan role admin, redirect ke admin.php
+            if ($row['role'] === 'admin') {
+                // Redirect ke halaman admin jika role adalah admin
                 $message = "Login Admin Berhasil";
                 header("Location: admin.php");
                 exit();
             } else {
-                // Jika username bukan admin, redirect ke index.php
+                // Redirect ke halaman user jika role bukan admin
                 $message = "Login Berhasil";
-                header("Location: login_admin.php");
+                header("Location: index.php");
                 exit();
             }
         } else {
@@ -52,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 $conn->close();
 ?>
+
 <html lang="en">
 
 <head>
@@ -97,7 +99,7 @@ $conn->close();
                 Login as Admin
             </button>
         </form>
-        <a class="text-[#F28C28] text-base font-semibold hover:text-[#d37722] transition duration-200 mt-4 inline-block" href="index.html">
+        <a class="text-[#F28C28] text-base font-semibold hover:text-[#d37722] transition duration-200 mt-4 inline-block" href="index.php">
             Kembali ke Utama
         </a>
     </div>
