@@ -6,12 +6,8 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Query untuk menampilkan 5 menu terbaru dengan gambar
-$sql = "SELECT id_menu, nama_menu, kategori, gambar FROM menu ORDER BY created_at DESC LIMIT 5";
-$result = $conn->query($sql);
-
-// Query untuk menampilkan semua menu yang tersedia dengan gambar
-$sql_all = "SELECT id_menu, nama_menu, gambar FROM menu";
+// Query untuk menampilkan semua menu yang tersedia dengan gambar, kategori, dan harga
+$sql_all = "SELECT id_menu, nama_menu, kategori, harga, gambar FROM menu";
 $result_all = $conn->query($sql_all);
 ?>
 
@@ -35,9 +31,6 @@ $result_all = $conn->query($sql_all);
             <div class="flex flex-col space-y-4">
                 <a href="#tambah-menu" class="text-lg flex items-center hover:text-gray-300 p-2 rounded-lg transition-all hover:bg-[#C67C4E]">
                     <i class="fas fa-plus mr-3"></i> Tambah Menu
-                </a>
-                <a href="#riwayat-menu" class="text-lg flex items-center hover:text-gray-300 p-2 rounded-lg transition-all hover:bg-[#C67C4E]">
-                    <i class="fas fa-history mr-3"></i> Riwayat Menu Terbaru
                 </a>
                 <a href="#menu-tersedia" class="text-lg flex items-center hover:text-gray-300 p-2 rounded-lg transition-all hover:bg-[#C67C4E]">
                     <i class="fas fa-list mr-3"></i> Daftar Menu Tersedia
@@ -103,10 +96,12 @@ $result_all = $conn->query($sql_all);
                         while ($row = $result_all->fetch_assoc()) {
                             echo "<div class='bg-white rounded-lg shadow-md p-6'>";
                             echo "<img src='menu/" . $row['gambar'] . "' alt='" . $row['nama_menu'] . "' class='w-full h-40 object-cover rounded-lg mb-4'>";
-                            echo "<h3 class='text-lg font-semibold text-gray-800 mb-2'>" . $row['nama_menu'] . "</h3>";
+                            echo "<h3 class='text-lg font-semibold text-gray-800'>" . $row['nama_menu'] . "</h3>";
+                            echo "<p class='text-sm text-gray-600'>Kategori: " . $row['kategori'] . "</p>";
+                            echo "<p class='text-sm text-gray-600'>Harga: Rp " . number_format($row['harga'], 0, ',', '.') . "</p>";
                             echo "<form action='hapus_menu.php' method='POST' onsubmit=\"return confirm('Apakah Anda yakin ingin menghapus menu ini?');\">";
                             echo "<input type='hidden' name='id_menu' value='" . $row['id_menu'] . "'>";
-                            echo "<button type='submit' class='w-full py-2 bg-red-600 text-white rounded-lg hover:bg-red-700'>Hapus</button>";
+                            echo "<button type='submit' class='w-full py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 mt-4'>Hapus</button>";
                             echo "</form>";
                             echo "</div>";
                         }

@@ -17,12 +17,12 @@ $stmt->bind_param("i", $id_menu);
 if ($stmt->execute()) {
     echo "<script>
         alert('Menu berhasil dihapus!');
-        window.location.href = 'index.php';
+        window.location.href = 'admin.php';
     </script>";
 } else {
     echo "<script>
         alert('Gagal menghapus menu.');
-        window.location.href = 'index.php';
+        window.location.href = 'admin.php';
     </script>";
 }
 
