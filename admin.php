@@ -7,11 +7,11 @@ if ($conn->connect_error) {
 }
 
 // Query untuk menampilkan 5 menu terbaru dengan gambar
-$sql = "SELECT nama_menu, kategori, gambar FROM menu ORDER BY created_at DESC LIMIT 5";
+$sql = "SELECT id_menu, nama_menu, kategori, gambar FROM menu ORDER BY created_at DESC LIMIT 5";
 $result = $conn->query($sql);
 
 // Query untuk menampilkan semua menu yang tersedia dengan gambar
-$sql_all = "SELECT nama_menu, gambar FROM menu";
+$sql_all = "SELECT id_menu, nama_menu, gambar FROM menu";
 $result_all = $conn->query($sql_all);
 ?>
 
@@ -94,26 +94,6 @@ $result_all = $conn->query($sql_all);
                 </form>
             </section>
 
-            <!-- Riwayat Menu Terbaru -->
-            <section id="riwayat-menu" class="mt-10">
-                <h2 class="text-3xl font-bold text-center text-[#341D15] mb-6">Riwayat Menu Terbaru</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <?php
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<div class='bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105 hover:shadow-xl'>";
-                            echo "<img src='menu/" . $row['gambar'] . "' alt='" . $row['nama_menu'] . "' class='w-full h-40 object-cover rounded-lg mb-4'>";
-                            echo "<h3 class='text-lg font-semibold text-gray-800 mb-2'>" . $row['nama_menu'] . "</h3>";
-                            echo "<p class='text-gray-600'>" . $row['kategori'] . "</p>";
-                            echo "</div>";
-                        }
-                    } else {
-                        echo "<p class='text-center text-gray-500'>Tidak ada riwayat menu.</p>";
-                    }
-                    ?>
-                </div>
-            </section>
-
             <!-- Daftar Menu Tersedia -->
             <section id="menu-tersedia" class="mt-10">
                 <h2 class="text-3xl font-bold text-center text-[#341D15] mb-6">Daftar Menu Tersedia</h2>
@@ -121,9 +101,13 @@ $result_all = $conn->query($sql_all);
                     <?php
                     if ($result_all->num_rows > 0) {
                         while ($row = $result_all->fetch_assoc()) {
-                            echo "<div class='bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105 hover:shadow-xl'>";
+                            echo "<div class='bg-white rounded-lg shadow-md p-6'>";
                             echo "<img src='menu/" . $row['gambar'] . "' alt='" . $row['nama_menu'] . "' class='w-full h-40 object-cover rounded-lg mb-4'>";
                             echo "<h3 class='text-lg font-semibold text-gray-800 mb-2'>" . $row['nama_menu'] . "</h3>";
+                            echo "<form action='hapus_menu.php' method='POST' onsubmit=\"return confirm('Apakah Anda yakin ingin menghapus menu ini?');\">";
+                            echo "<input type='hidden' name='id_menu' value='" . $row['id_menu'] . "'>";
+                            echo "<button type='submit' class='w-full py-2 bg-red-600 text-white rounded-lg hover:bg-red-700'>Hapus</button>";
+                            echo "</form>";
                             echo "</div>";
                         }
                     } else {
